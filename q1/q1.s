@@ -1,5 +1,7 @@
 .section .text
 
+.extern malloc
+
 .global make_node
 make_node: #arguments ==(value =a0)
     addi sp,sp,-16 #add stack
