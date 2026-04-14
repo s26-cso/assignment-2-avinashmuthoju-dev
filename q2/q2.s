@@ -1,6 +1,6 @@
 .section .data
 newline:.asciz "\n"
-fmt: .asciz "%lld "
+fmt: .asciz "%d "
 
 .section .text
 .global main
