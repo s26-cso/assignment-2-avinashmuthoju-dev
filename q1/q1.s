@@ -11,7 +11,7 @@ make_node: #arguments ==(value =a0)
     li  a0,24   
     call malloc   #allocate memory for 24 bytes
 
-    ld t0,0(sp)   #load val in temp
+    lw t0,0(sp)   #load val in temp
     sw t0,0(a0)   # store in 0(a0) ,node->val
     sd x0,8(a0)   #node->left=NULL ,x0=0
     sd x0,16(a0)  #node->right=NULL
