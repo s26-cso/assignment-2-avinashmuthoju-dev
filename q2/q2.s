@@ -1,6 +1,7 @@
 .section .data
 newline:.asciz "\n"
 fmt: .asciz "%d "
+fmt_end : .asciz "%d"
 
 .section .text
 .global main
@@ -125,6 +126,7 @@ push:
 
 print:
   li s2,0   #s2 is a pointer
+  addi s3,s0,-1 #s3=n-1
 print_loop:
   bge s2,s0,free_all  #if (s2>=n) exit
 
@@ -132,12 +134,15 @@ print_loop:
   add t3,s5,t2  #ans+s2*8
   ld a1,0(t3)   #a1=ans[i]
 
+  beq s2,s3,last_val
   la a0,fmt    #a0 = "%lld"
   call printf  #print
 
   addi s2,s2,1  #s2++
   j print_loop
-
+last_val:
+  la a0,fmt_end
+  call printf
 free_all:
   la a0,newline #a0 = "\n"
   call printf  #prints newline
