@@ -42,7 +42,7 @@ loop:
 
     mv a0,s0
     call fgetc      #read character at left index
-    mv t0,a0       #store left char in t0
+    mv s4,a0       #store left char in t0
 
     mv a0,s0
     mv a1,s3      #position=right index
@@ -53,7 +53,7 @@ loop:
     call fgetc    #read character at right index
     mv t1,a0      #store right char in t1
 
-    bne t0,t1,no    #if t0!=t1 not a palindrome
+    bne s4,t1,no    #if s4!=t1 not a palindrome
 
     addi s2,s2,1    #left++
     addi s3,s3,-1   #right--
