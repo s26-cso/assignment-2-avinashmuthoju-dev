@@ -11,10 +11,16 @@ no_msg: .asciz "No\n"
 .extern fseek      #moves file pointer
 .extern ftell      #get current position
 .extern fgetc      #read one character
+.extern fclose
 .extern printf 
 main:
-    addi sp,sp,-16
-    sd ra,0(sp)    #save return address
+    addi sp,sp,-48
+    sd ra,0(sp)  #save return address
+    sd s0,8(sp)
+    sd s1,16(sp)
+    sd s2,24(sp)
+    sd s3,32(sp)
+    sd s4,40(sp)    
 
     la a0,filename   
     la a1,read
@@ -66,6 +72,13 @@ no:
     la a0,no_msg
     call printf     #print "No"
 end:
+    mv a0,s0;
+    call fclose
     ld ra,0(sp)     #restore return address
-    addi sp,sp,16
+    ld s0,8(sp)
+    ld s1,16(sp)
+    ld s2,24(sp)
+    ld s3,32(sp)
+    ld s4,40(sp)
+    addi sp,sp,48
     ret             #return
